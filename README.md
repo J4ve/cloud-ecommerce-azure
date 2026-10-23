@@ -34,6 +34,21 @@ A Node.js Express storefront deployed on Microsoft Azure. Customers browse a pro
 
 See `diagram/architecture.png` for the visual, `report/report.md` for the full design writeup.
 
+## Results
+
+The full stack was deployed to Azure (Japan East) for grading in May 2026, and the GitHub Actions pipeline deployed the app and passed its `/health` smoke test. Captioned evidence is in `deployment/screenshots/` (index in `deployment/screenshots/README.md`).
+
+| What was shown to work | Evidence |
+|---|---|
+| Resource group `rg-genericmart-cloud` held all 8 project resources | `deployment/screenshots/01-resource-group.png` |
+| App Service Plan `asp-genericmart` ran Standard S1 on Linux with an instance count of 2 | `deployment/screenshots/02-app-service-instances.png` |
+| Azure SQL Database `sqldb-genericmart` was Online on Standard S0 (10 DTUs) | `deployment/screenshots/03-sql-server.png` |
+| Application Insights was linked to its Log Analytics workspace, and Managed Identity was On for the Web App | `deployment/screenshots/05-app-insights.png`, `06-managed-identity.png` |
+| GitHub Actions run number 5 of `azure-deploy.yml` passed every step in 3m 0s, including `Smoke test /health endpoint` | `deployment/screenshots/08-cicd-actions-run.png` |
+| The catalog, cart, checkout and search views rendered in the browser | `deployment/screenshots/07-app-running.png`, `09` to `12` |
+
+Earlier pipeline runs failed at the `setup-node` cache step until `src/package-lock.json` was committed (see `CHANGELOG.md`, Fixed).
+
 ## Repository layout
 
 ```
